@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Library System</title>
+
+
+<style>
+    :root {
+        --color-primary: #1A365D;
+        --color-text: #2c3e50;
+        --color-text-light: #64748b;
+        --color-bg: #f7fafc;
+        --color-bg-alt: #edf2f7;
+        --color-white: #ffffff;
+        --color-border: #e2e8f0;
+
+        --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        --font-heading: Georgia, serif;
+
+        --space-sm: 1rem;
+        --space-md: 2rem;
+        --space-lg: 4rem;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: var(--font-main);
+        color: var(--color-text);
+        background: var(--color-bg);
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 0 var(--space-sm);
+    }
+
+    h1, h2 {
+        font-family: var(--font-heading);
+    }
+
+    .section-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        color: var(--color-primary);
+        margin-bottom: 8px;
+        display: inline-block;
+    }
+
+    /*HEADER*/
+    .header {
+        background: var(--color-white);
+        border-bottom: 1px solid var(--color-border);
+        padding: 1rem 0;
+    }
+
+    /*HERO*/
+    .hero {
+        padding: var(--space-lg) 0;
+        text-align: center;
+    }
+
+    .hero-description {
+        color: var(--color-text-light);
+        max-width: 600px;
+        margin: auto;
+    }
+
+    /*ABOUT*/
+    .about {
+        padding: var(--space-lg) 0;
+        background: var(--color-bg-alt);
+    }
+
+    .about p {
+        color: var(--color-text-light);
+    }
+
+    /*FOOTER*/
+    .footer {
+        padding: var(--space-md) 0;
+        text-align: center;
+        border-top: 1px solid var(--color-border);
+    }
+</style>
+
+
+</head>
+
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <h3>College Library</h3>
+    </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+
+        <span class="section-label">About</span>
+
+        <h1>Library Management System</h1>
+
+        <p class="hero-description">
+            A modern platform designed to help students and educators access, manage, 
+            and share academic resources efficiently.
+        </p>
+
+    </div>
+</section>
+
+<!-- About -->
+<section class="about">
+    <div class="container">
+
+        <span class="section-label">Our System</span>
+
+        <h2>Smart Library for Modern Learning</h2>
+
+        <p>
+            This system provides a simple and efficient way to manage books, track 
+            student activity, and streamline library operations.
+        </p>
+
+        <p>
+            Built for clarity and usability, it ensures faster access to knowledge 
+            while maintaining a smooth experience for both students and administrators.
+        </p>
+
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2026 FrostyFalcon</p>
+</footer>
+<script src="..\assets\css\script.js"></script>
+</body>
+</html>

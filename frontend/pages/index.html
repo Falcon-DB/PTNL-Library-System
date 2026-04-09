@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="..\assets\css\style.css">
+    <!--<link rel="stylesheet" href="frontend\css\main.css"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A modern library system for students and educators. Explore, share, and collaborate on academic resources in a secure, trust-based platform.">
+    <title>Pree Trust Library Network</title>
+</head>
+<script>
+    const user = localStorage.getItem("loggedInUser");
+
+    if (!user) {
+        window.location.href = "login.html";
+    }
+</script>
+<body>
+<!--
+This is a project demo for Pree Trust Library Network, for demonstration only 
+https://github.com/Falcon-DB -- developer's github profile
+https://www.linkedin.com/in/gourab-karmakar-629895323 -- linkedin profile
+-->
+<!-- Header -->
+<header class="header">
+    <div class="container header-inner">
+    <a href="#" class="logo">College Library</a>
+
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- RIGHT SIDE GROUP -->
+    <div class="nav-right">
+        <!-- NAV -->
+        <nav class="nav" id="nav">
+            <ul class="nav-list">
+                <li><a href="#" class="nav-link">About</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Books▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#list-book">Browse Books</a></li>
+                        <li><a href="#find-book">Add Book</a></li>
+                        <li><a href="#book-analytics">Book Analytics</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#my-library" class="nav-link">My Library▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#issued-books">Issued Books</a></li>
+                        <li><a href="#wishlist">Wishlist</a></li>
+                        <li><a href="#issued-history">Issued History</a></li>
+                        <li><a href="#due-dates">Due Dates</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#dashboard" class="nav-link">Dashboard▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#user-dashboard">User Dashboard</a></li>
+                        <li><a href="#admin-dashboard">Admin Dashboard</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#admin" class="nav-link">Admin▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#manage-books">Manage Books</a></li>
+                        <li><a href="#manage-users">Manage Users</a></li>
+                        <li><a href="#issue-return">Issue / Return Control</a></li>
+                        <li><a href="#categories-management">Categories Management</a></li>
+                        <li><a href="#system-reports">System Reports</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#contact" class="nav-link">Connect▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="feedback.html">Provide Feedback</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- PROFILE -->
+        <div class="profile-menu">
+            <div class="profile-trigger">👤</div>
+
+            <ul class="profile-dropdown">
+                <li><a href="#profile">My Profile</a></li>
+                <li><a href="#my-library">My Library</a></li>
+                <li><a href="#settings">Settings</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</header>
+
+<!-- Hero Section -->
+
+<section class="hero" id="hero">
+    <div class="container">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <p class="hero-tagline">College Library Network</p>
+
+            <h1>Welcome to College Library</h1>
+
+            <p class="hero-description">
+                Empowering students and educators through a secure, 
+                trust-based platform. Share your work, exchange insights, 
+                and join thousands of high-achieving peers in a collaborative 
+                learning environment.
+            </p>
+        </div>
+    </div>
+</div>
+
+</section>
+
+<!-- About Section -->
+
+<section class="about" id="about">
+    <div class="container">
+        <div class="about-grid">
+        <!-- Text Content -->
+        <div class="about-text">
+            <span class="section-label">About</span>
+
+            <h2>Smart Library for Modern Learning</h2>
+
+            <p>
+                The Student Library System provides a simple and efficient way 
+                to access, manage, and track academic resources. Students can 
+                explore books, monitor their activity, and stay organized in 
+                one unified platform.
+            </p>
+
+            <p>
+                Built with a focus on clarity and usability, the system enables 
+                faster access to knowledge while ensuring smooth library 
+                operations for both students and administrators.
+            </p>
+
+            <p class="about-note">
+                Designed for speed, simplicity, and scalability — making 
+                everyday library interactions seamless.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+</section>
+
+<!-- Services Section -->
+
+<section class="services" id="services">
+    <div class="container">
+    <span class="section-label">Services</span>
+    <h2>How it can help your growth</h2>
+
+    <div class="services-grid">
+
+        <!-- Service 1 -->
+        <article class="service-card">
+            <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v15H6.5A2.5 2.5 0 0 0 4 19.5V4.5A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+            </div>
+
+            <h3>Scholarly Sharing</h3>
+
+            <p>
+                A dedicated space for students and teachers to publish and share 
+                original work. Build your academic profile and connect with a 
+                global community of researchers.
+            </p>
+
+            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8535783/" class="btn-small">
+                Learn More
+            </a>
+        </article>
+
+        <!-- Service 2 -->
+        <article class="service-card">
+            <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+            </div>
+
+            <h3>Resource Discovery</h3>
+
+            <p>
+                Explore an extensive collection of rare texts and niche academic 
+                journals. Advanced search tools help you find exactly what you 
+                need for your next project.
+            </p>
+
+            <a href="https://www.ijisrt.com/articles/the-role-of-repositories-in-enhancing-discovery" class="btn-small">
+                Learn More
+            </a>
+        </article>
+
+        <!-- Service 3 -->
+        <article class="service-card">
+            <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+            </div>
+
+            <h3>Collaborative Research</h3>
+
+            <p>
+                Beyond just reading, use our library to annotate, save, and 
+                share resources with peers. Transform static information into 
+                a collaborative learning experience.
+            </p>
+
+            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6644188/" class="btn-small">
+                Learn More
+            </a>
+        </article>
+
+    </div>
+</div>
+
+</section>
+
+<!-- Analytics Section -->
+
+<section class="analytics" id="analytics">
+    <div class="container">
+    <span class="section-label">Analytics</span>
+    <h2>Library Collection Insights</h2>
+
+    <div class="analytics-grid">
+
+        <div class="analytics-card">
+            <h3>Collection Growth</h3>
+            <canvas id="libraryChart"></canvas>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Category Distribution</h3>
+            <canvas id="categoryChart"></canvas>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('libraryChart');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2021', '2022', '2023', '2024', '2025'],
+                datasets: [{
+                    label: 'Books Growth',
+                    data: [4000, 6000, 8500, 10000, 12000],
+                    borderWidth: 2,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } }
+            }
+        });
+    </script>
+
+    <script>
+        const ctx2 = document.getElementById('categoryChart');
+
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['CSE', 'ECE', 'ME', 'Civil', 'Others'],
+                datasets: [{
+                    label: 'Books',
+                    data: [3000, 2000, 1500, 1000, 4500],
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+
+</div>
+
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <span class="section-label">Get in Touch</span>
+        <h2>Let's Work</h2>
+
+        <p>
+          Are you facing any problems? Send us a message and 
+          we’ll get back to you soon.
+        </p>
+
+        <div class="social-links">
+          <!-- Icons unchanged -->
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="event.preventDefault(); sendQuery();">
+        
+        <div class="form-row">
+          <input type="text" class="form-input" name="name" placeholder="Your name" required>
+          <input type="email" class="form-input" name="email" placeholder="Your email" required>
+        </div>
+
+        <textarea 
+          id="message"
+          class="form-input form-textarea" 
+          name="message" 
+          placeholder="Enter your query" 
+          rows="5" 
+          required>
+        </textarea>
+
+        <button type="submit" class="btn btn-primary">
+          Send Message
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<script>
+function sendQuery() {
+  const message = document.getElementById("message").value;
+
+  if (!message) {
+    alert("Please enter a message");
+    return;
+  }
+
+  fetch("/submit_query", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    credentials: "include",
+    body: JSON.stringify({
+      message: message
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert(data.message || data.error);
+    document.getElementById("message").value = "";
+  })
+  .catch(error => {
+    console.error("Error:", error);
+    alert("Something went wrong");
+  });
+}
+</script>
+<!-- Newsletter Section -->
+<section class="newsletter" id="newsletter">
+  <div class="container">
+    <div class="newsletter-grid">
+
+      <div class="newsletter-map">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.7292526050787!2d88.4540377737326!3d22.73830257937401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f898ec702e5daf%3A0xfa41b06da8478350!2sAdamas%20University!5e0!3m2!1sen!2sin!4v1775158735498!5m2!1sen!2sin"
+          width="100%" 
+          height="100%" 
+          style="border:0; border-radius: 8px;" 
+          loading="lazy">
+        </iframe>
+      </div>
+
+      <div class="newsletter-content">
+        <span class="section-label">Stay Connected</span>
+
+        <h3>Join the creative journey</h3>
+
+        <p>
+          Get updates on new releases, book updates, and exclusive content. No spam.
+        </p>
+
+        <!--UPDATED FORM-->
+        <form class="newsletter-form" onsubmit="event.preventDefault(); subscribe();">
+          <input 
+            type="email" 
+            id="subscribeEmail"
+            class="form-input" 
+            name="email" 
+            placeholder="Your email address" 
+            required
+          >
+
+          <button type="submit" class="btn btn-primary">
+            Subscribe
+          </button>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SCRIPT -->
+<script>
+function subscribe() {
+  const email = document.getElementById("subscribeEmail").value;
+
+  if (!email) {
+    alert("Please enter email");
+    return;
+  }
+
+  fetch("/subscribe", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    credentials: "include",
+    body: JSON.stringify({
+      email: email
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert(data.message);
+    document.getElementById("subscribeEmail").value = "";
+  })
+  .catch(error => {
+    console.error("Error:", error);
+    alert("Something went wrong");
+  });
+}
+</script>
+<!-- Footer -->
+
+<footer class="footer">
+    <div class="container footer-content">
+        <p class="footer-copyright">© FrostyFalcon</p>
+
+    <a href="https://www.linkedin.com/in/gourab-karmakar-629895323" class="footer-credit">
+        Designed by FrostyFalcon
+    </a>
+</div>
+
+</footer>
+
+<!-- Script -->
+<script src="..\assets\js\script.js"></script>
+<!-- <script src="/static/js/main.js"></script> -->
+
+</body>
+</html>

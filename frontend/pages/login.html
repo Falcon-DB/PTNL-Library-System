@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Collage Library Login</title>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #d2e5ef; /* FULL background same color */
+  height: 100vh;
+}
+
+/* Container FULL WIDTH */
+.container {
+  width: 100%;
+  height: 100vh;
+  background: #eae6dd;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: #f3f1ec;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #e8a87c;
+}
+
+.signup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.signup button {
+  background: #2f3e2f;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 40px;
+}
+
+/* Left */
+.left {
+  width: 35%;
+}
+
+.left h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  font-size: 14px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  background: #f5f5f5;
+  margin-top: 5px;
+}
+
+/* Button */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #2f3e2f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.forgot {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+/* Social */
+.social {
+  margin-top: 20px;
+}
+
+.icons {
+  margin-top: 10px;
+}
+
+.icons i {
+  margin-right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  transition: 0.3s;
+}
+
+.icons i:hover {
+  color: #2f3e2f;
+}
+
+/* Right Image */
+.right {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.right img {
+  width: 80%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <span></span>Collage Library
+    </div>
+
+    <div class="signup">
+      <p>Don't have an account?</p>
+      <a href="signup.html">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- Left -->
+    <div class="left">
+      <h1>Log in</h1>
+
+      <form onsubmit="return loginUser()">
+
+        <div class="input-group">
+          <label>Username or Email</label>
+          <input type="text" id="username" placeholder="Enter your username or email" required>
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="password" placeholder="Enter your password" required>
+        </div>
+
+        <button class="login-btn" type="submit">Log In</button>
+
+      </form>
+
+      <div class="forgot">Forgot Password?</div>
+
+      <div class="social">
+        <span>Log In with</span>
+        <div class="icons">
+          <i class="fab fa-google"></i>
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-linkedin"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right -->
+    <div class="right">
+      <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="books">
+    </div>
+
+  </div>
+
+</div>
+<script src="../assets/js/script.js"></script>
+</body>
+</html>

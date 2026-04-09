@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Collage Library Signup</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #d2e5ef;
+  height: 100vh;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  background: #eae6dd;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: #f3f1ec;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.signup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 40px;
+}
+
+/* LEFT SIDE */
+.left {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left img {
+  width: 75%;
+}
+
+/* SOCIAL */
+.social {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.icons {
+  margin-top: 10px;
+}
+
+.icons i {
+  margin: 0 10px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  transition: 0.3s;
+}
+
+.icons i:hover {
+  color: #2f3e2f;
+}
+
+/* RIGHT SIDE */
+.right {
+  width: 28%;
+}
+
+.right h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 12px;
+}
+
+.input-group label {
+  font-size: 13px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background: #f5f5f5;
+  margin-top: 5px;
+}
+
+/* Button */
+.login-btn {
+  width: 100%;
+  padding: 10px;
+  background: #2f3e2f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">Collage Library</div>
+
+    <div class="signup">
+      <p>Already have an account?</p>
+      <a href="login.html">Log In</a>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- LEFT -->
+    <div class="left">
+      <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png">
+
+      <div class="social">
+        <p>Sign Up with</p>
+        <div class="icons">
+          <i class="fab fa-google"></i>
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-linkedin"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+      <h1>Sign Up</h1>
+
+      <form onsubmit="return signupUser()">
+
+        <div class="input-group">
+          <label>Full Name</label>
+          <input type="text" id="name" required>
+        </div>
+
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" id="email" required>
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="password" required>
+        </div>
+
+        <div class="input-group">
+          <label>Confirm Password</label>
+          <input type="password" id="confirm" required>
+        </div>
+
+        <button class="login-btn" type="submit">Sign Up</button>
+
+      </form>
+    </div>
+
+  </div>
+
+</div>
+<script src="../assets/js/script.js"></script>
+<script>
+async function signupUser() {
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+  const confirm = document.getElementById("confirm").value;
+
+  if (pass !== confirm) {
+    alert("Passwords do not match");
+    return false;
+  }
+
+  const data = await apiRequest("/api/auth/signup", "POST", {
+    full_name: name,
+    email: email,
+    password: pass
+  });
+
+  if (data && data.success) {
+    alert("Signup successful! Please login.");
+    window.location.href = "/login.html";
+  }
+
+  return false;
+}
+</script>
+
+</body>
+</html>
