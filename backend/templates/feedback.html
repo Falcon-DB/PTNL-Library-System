@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Feedback - Collage Library</title>
 
-<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 <!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -114,7 +114,7 @@ textarea {
 
       <nav class="nav" id="nav">
         <ul class="nav-list">
-          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="/home" class="nav-link">Home</a></li>
 
           <li class="dropdown">
             <a href="#" class="nav-link">Books▾</a>
@@ -140,10 +140,10 @@ textarea {
         <div class="profile-trigger">👤</div>
 
         <ul class="profile-dropdown">
-          <li><a href="profile.html">My Profile</a></li>
-          <li><a href="index.html">My Library</a></li>
+          <li><a href="/profile">My Profile</a></li>
+          <li><a href="#">My Library</a></li>
           <li><a href="#">Settings</a></li>
-          <li><a href="#" onclick="logout()">Logout</a></li>
+          <li><a href="#" onclick="logout(); return false;">Logout</a></li>
         </ul>
       </div>
 
@@ -152,7 +152,7 @@ textarea {
 </header>
 
 <!--FEEDBACK CONTENT-->
-<div class="feedback-container">
+<form id="feedbackForm" class="feedback-container">
 
   <h1>Please Rate Your Experience</h1>
   <p>to help us serve you better</p>
@@ -165,10 +165,9 @@ textarea {
     <i class="fa fa-star" data-value="5"></i>
   </div>
 
-  <textarea rows="5" placeholder="Additional Comments  
-Feel free to add suggestions..."></textarea>
-
-  <button class="submit-btn" onclick="submitFeedback()">Send Feedback</button>
+  <textarea id="comment" rows="5" placeholder="Enter your feedback"></textarea>
+  <input type="hidden" id="rating" value="0">
+  <button type="submit" class="submit-btn">Send Feedback</button>
 
   <div class="divider"></div>
 
@@ -177,59 +176,10 @@ Feel free to add suggestions..."></textarea>
     <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
     <a href="https://twitter.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
   </div>
-</div>
+</form>
 
 <!--REQUIRED SCRIPT-->
-<script src="../assets/js/script.js"></script>
-
-<script>
-let rating = 0;
-
-const stars = document.querySelectorAll("#stars i");
-
-stars.forEach(star => {
-  star.addEventListener("click", () => {
-    rating = star.getAttribute("data-value");
-
-    stars.forEach(s => s.classList.remove("active"));
-
-    for(let i = 0; i < rating; i++){
-      stars[i].classList.add("active");
-    }
-  });
-});
-function submitFeedback() {
-  const comment = document.querySelector("textarea").value;
-
-  if (rating == 0) {
-    alert("Please select a rating ⭐");
-    return;
-  }
-  fetch("/api/feedback/submit", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  credentials: "include",
-  body: JSON.stringify({
-    rating: rating,
-    comment: comment
-  })
-})
-  .then(res => res.json())
-.then(data => {
-  if (data.success || data.message) {
-    alert("Feedback saved!");
-    window.location.href = "/";
-  } else {
-    alert(data.error || "Failed to submit feedback");
-  }
-})
-.catch(err => {
-  console.error(err);
-  alert("Server error");
-});
-}
-</script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<!--<script src="/static/js/script.js"></script>-->
 </body>
 </html>

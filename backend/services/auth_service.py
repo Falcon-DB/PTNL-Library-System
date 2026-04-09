@@ -34,7 +34,7 @@ def login_user(email, password):
 
     cursor.execute(
         """
-        SELECT users_id, full_name, email
+        SELECT users_id, full_name, email, role
         FROM Users
         WHERE email = ? AND password = ?
         """,
@@ -47,7 +47,8 @@ def login_user(email, password):
         return {
             "user_id": row[0],
             "full_name": row[1],
-            "email": row[2]
+            "email": row[2],
+            "role": row[3]
         }
 
     return None

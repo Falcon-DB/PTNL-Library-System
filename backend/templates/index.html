@@ -3,19 +3,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="..\assets\css\style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <!--<link rel="stylesheet" href="frontend\css\main.css"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A modern library system for students and educators. Explore, share, and collaborate on academic resources in a secure, trust-based platform.">
     <title>Pree Trust Library Network</title>
 </head>
-<script>
-    const user = localStorage.getItem("loggedInUser");
-
-    if (!user) {
-        window.location.href = "login.html";
-    }
-</script>
 <body>
 <!--
 This is a project demo for Pree Trust Library Network, for demonstration only 
@@ -78,11 +71,11 @@ https://www.linkedin.com/in/gourab-karmakar-629895323 -- linkedin profile
                 </li>
 
                 <li class="dropdown">
-                    <a href="#contact" class="nav-link">Connect▾</a>
-                    <ul class="dropdown-menu">
+                    <a href="#contact" class="nav-link">Connect</a>  <!-- Feedback is currently not available -->
+                    <!--<ul class="dropdown-menu">
                         <li><a href="#contact">Contact Us</a></li>
-                        <li><a href="feedback.html">Provide Feedback</a></li>
-                    </ul>
+                         <li><a href="/feedback">Provide Feedback</a></li>
+                    </ul>-->
                 </li>
             </ul>
         </nav>
@@ -92,10 +85,10 @@ https://www.linkedin.com/in/gourab-karmakar-629895323 -- linkedin profile
             <div class="profile-trigger">👤</div>
 
             <ul class="profile-dropdown">
-                <li><a href="#profile">My Profile</a></li>
+                <li><a href="/profile">My Profile</a></li>
                 <li><a href="#my-library">My Library</a></li>
                 <li><a href="#settings">Settings</a></li>
-                <li><a href="#" onclick="logout()">Logout</a></li>
+                <li><a href="#" onclick="logout(); return false;">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -247,6 +240,7 @@ https://www.linkedin.com/in/gourab-karmakar-629895323 -- linkedin profile
     <div class="container">
     <span class="section-label">Analytics</span>
     <h2>Library Collection Insights</h2>
+    <h4>NOTE: Data is for illustrative purposes only (As per Techno India Group's Data)</h4>
 
     <div class="analytics-grid">
 
@@ -273,7 +267,7 @@ https://www.linkedin.com/in/gourab-karmakar-629895323 -- linkedin profile
                 labels: ['2021', '2022', '2023', '2024', '2025'],
                 datasets: [{
                     label: 'Books Growth',
-                    data: [4000, 6000, 8500, 10000, 12000],
+                    data: [35000, 48000, 62000, 78000, 94000],
                     borderWidth: 2,
                     tension: 0.4
                 }]
@@ -294,7 +288,7 @@ https://www.linkedin.com/in/gourab-karmakar-629895323 -- linkedin profile
                 labels: ['CSE', 'ECE', 'ME', 'Civil', 'Others'],
                 datasets: [{
                     label: 'Books',
-                    data: [3000, 2000, 1500, 1000, 4500],
+                    data: [6230, 4158, 6892, 3607, 27305],
                     borderWidth: 1
                 }]
             }
@@ -340,46 +334,13 @@ https://www.linkedin.com/in/gourab-karmakar-629895323 -- linkedin profile
           required>
         </textarea>
 
-        <button type="submit" class="btn btn-primary">
-          Send Message
-        </button>
-
+        <button id="sendQueryBtn" class="login-btn">Send Message</button>
       </form>
 
     </div>
   </div>
 </section>
 
-<script>
-function sendQuery() {
-  const message = document.getElementById("message").value;
-
-  if (!message) {
-    alert("Please enter a message");
-    return;
-  }
-
-  fetch("/submit_query", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    credentials: "include",
-    body: JSON.stringify({
-      message: message
-    })
-  })
-  .then(res => res.json())
-  .then(data => {
-    alert(data.message || data.error);
-    document.getElementById("message").value = "";
-  })
-  .catch(error => {
-    console.error("Error:", error);
-    alert("Something went wrong");
-  });
-}
-</script>
 <!-- Newsletter Section -->
 <section class="newsletter" id="newsletter">
   <div class="container">
@@ -387,7 +348,7 @@ function sendQuery() {
 
       <div class="newsletter-map">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.7292526050787!2d88.4540377737326!3d22.73830257937401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f898ec702e5daf%3A0xfa41b06da8478350!2sAdamas%20University!5e0!3m2!1sen!2sin!4v1775158735498!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14736.331433568655!2d88.42211095765214!3d22.576004122970545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f970ae9a2e19b5%3A0x16c43b9069f4b159!2sTechno%20India%20University!5e0!3m2!1sen!2sin!4v1775764474072!5m2!1sen!2sin" 
           width="100%" 
           height="100%" 
           style="border:0; border-radius: 8px;" 
@@ -405,58 +366,27 @@ function sendQuery() {
         </p>
 
         <!--UPDATED FORM-->
-        <form class="newsletter-form" onsubmit="event.preventDefault(); subscribe();">
-          <input 
-            type="email" 
-            id="subscribeEmail"
-            class="form-input" 
-            name="email" 
-            placeholder="Your email address" 
-            required
-          >
+        <form id="subscribeForm" class="newsletter-form">
 
-          <button type="submit" class="btn btn-primary">
-            Subscribe
-          </button>
-        </form>
+        <input 
+            type="email"
+            id="subscribeEmail"
+            class="form-input"
+            placeholder="Your email address"
+            required
+                >
+
+        <button type="submit" class="login-btn">
+        Subscribe
+        </button>
+
+</form>
 
       </div>
 
     </div>
   </div>
 </section>
-
-<!-- SCRIPT -->
-<script>
-function subscribe() {
-  const email = document.getElementById("subscribeEmail").value;
-
-  if (!email) {
-    alert("Please enter email");
-    return;
-  }
-
-  fetch("/subscribe", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    credentials: "include",
-    body: JSON.stringify({
-      email: email
-    })
-  })
-  .then(res => res.json())
-  .then(data => {
-    alert(data.message);
-    document.getElementById("subscribeEmail").value = "";
-  })
-  .catch(error => {
-    console.error("Error:", error);
-    alert("Something went wrong");
-  });
-}
-</script>
 <!-- Footer -->
 
 <footer class="footer">
@@ -471,8 +401,14 @@ function subscribe() {
 </footer>
 
 <!-- Script -->
-<script src="..\assets\js\script.js"></script>
-<!-- <script src="/static/js/main.js"></script> -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script>
+const user = localStorage.getItem("user");
+
+if (!user) {
+    window.location.href = "/login";
+}
+</script>
 
 </body>
 </html>

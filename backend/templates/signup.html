@@ -143,7 +143,7 @@ body {
 
     <div class="signup">
       <p>Already have an account?</p>
-      <a href="login.html">Log In</a>
+      <a href="/login">Log In</a>
     </div>
   </div>
 
@@ -157,10 +157,18 @@ body {
       <div class="social">
         <p>Sign Up with</p>
         <div class="icons">
-          <i class="fab fa-google"></i>
-          <i class="fab fa-facebook"></i>
-          <i class="fab fa-instagram"></i>
-          <i class="fab fa-linkedin"></i>
+          <a href="https://accounts.google.com" target="_blank">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="https://www.facebook.com/gourab61" target="_blank">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="https://www.instagram.com/sokol4_24" target="_blank">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/gourab-karmakar-629895323" target="_blank">
+            <i class="fab fa-linkedin"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -169,7 +177,7 @@ body {
     <div class="right">
       <h1>Sign Up</h1>
 
-      <form onsubmit="return signupUser()">
+      <form id="signupForm">
 
         <div class="input-group">
           <label>Full Name</label>
@@ -199,9 +207,13 @@ body {
   </div>
 
 </div>
-<script src="../assets/js/script.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 <script>
-async function signupUser() {
+document.getElementById("signupForm").addEventListener("submit", async function(e) {
+  e.preventDefault();   // 🔥 STOP RELOAD
+
+  console.log("🔥 Signup triggered");
+
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
   const pass = document.getElementById("password").value;
@@ -209,23 +221,36 @@ async function signupUser() {
 
   if (pass !== confirm) {
     alert("Passwords do not match");
-    return false;
+    return;
   }
 
-  const data = await apiRequest("/api/auth/signup", "POST", {
-    full_name: name,
-    email: email,
-    password: pass
-  });
+  try {
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        full_name: name,
+        email: email,
+        password: pass
+      })
+    });
 
-  if (data && data.success) {
-    alert("Signup successful! Please login.");
-    window.location.href = "/login.html";
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("Signup successful!");
+      window.location.href = "/login";
+    } else {
+      alert(data.error || "Signup failed");
+    }
+
+  } catch (err) {
+    console.error(err);
+    alert("Server error");
   }
-
-  return false;
-}
+});
 </script>
-
 </body>
 </html>

@@ -163,7 +163,7 @@ body {
 
     <div class="signup">
       <p>Don't have an account?</p>
-      <a href="signup.html">Sign Up</a>
+      <a href="/signup">Sign Up</a>
     </div>
   </div>
 
@@ -195,10 +195,18 @@ body {
       <div class="social">
         <span>Log In with</span>
         <div class="icons">
-          <i class="fab fa-google"></i>
-          <i class="fab fa-facebook"></i>
-          <i class="fab fa-instagram"></i>
-          <i class="fab fa-linkedin"></i>
+          <a href="https://accounts.google.com" target="_blank">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="https://www.facebook.com/gourab61" target="_blank">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="https://www.instagram.com/sokol4_24" target="_blank">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/gourab-karmakar-629895323" target="_blank">
+            <i class="fab fa-linkedin"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -211,6 +219,6 @@ body {
   </div>
 
 </div>
-<script src="../assets/js/script.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
