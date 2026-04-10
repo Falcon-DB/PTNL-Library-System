@@ -5,11 +5,11 @@ https://github.com/Falcon-DB -- developer's github profile
 https://www.linkedin.com/in/gourab-karmakar-629895323 -- linkedin profile
 */
 :root {
-  --color-primary: #1A365D;       /*Deep Navy*/
+  --color-primary: #1A365D;
   --color-primary-light: #EBF4FF;
   --color-primary-dark: #12263F;
 
-  --color-accent: #3182CE;        /*Steel Blue*/
+  --color-accent: #3182CE;
 
   --color-text: #1A202C;
   --color-text-light: #4A5568;
@@ -57,7 +57,7 @@ https://www.linkedin.com/in/gourab-karmakar-629895323 -- linkedin profile
 }
 
 /*Dropdown*/
-.profile-dropdown {    /*changed from .dropdown-menu to .profile-dropdown for specificity*/
+.profile-dropdown {
   position: absolute;
   right: 0;
   top: 120%;
@@ -76,7 +76,7 @@ https://www.linkedin.com/in/gourab-karmakar-629895323 -- linkedin profile
   pointer-events: none;
 }
 
-.profile-menu.active .profile-dropdown {    /*changed from .dropdown-menu to .profile-dropdown for specificity*/
+.profile-menu.active .profile-dropdown {
   display: block;
   opacity: 1;
   transform: translateY(0);
@@ -466,27 +466,27 @@ section {
   align-items: center;
   justify-content: center;
 
-  background: #EBF4FF;           /*soft blue background*/
-  color: #1A365D;                /*deep navy icon color*/
+  background: #EBF4FF;
+  color: #1A365D;
 
-  border-radius: 12px;           /*slightly smoother than default*/
+  border-radius: 12px;
   margin-bottom: var(--space-sm);
 
-  transition: all 0.25s ease;    /*smooth hover*/
+  transition: all 0.25s ease;
 }
 
 /*Icon styling*/
 .service-icon svg {
   width: 28px;
   height: 28px;
-  stroke: currentColor;          /*uses parent color*/
+  stroke: currentColor;
 }
 
 /*Hover effect (premium feel)*/
 .service-card:hover .service-icon {
-  background: #3182CE;           /*accent blue*/
-  color: #FFFFFF;                /*white icon*/
-  transform: translateY(-2px);   /*subtle lift*/
+  background: #3182CE;
+  color: #FFFFFF;
+  transform: translateY(-2px);
 }
 .service-card:hover {
   transform: translateY(-6px);
@@ -962,7 +962,7 @@ section {
   border: none;
   border-radius: 8px;
 
-  padding: 12px 28px;   /* 🔥 THIS FIXES IT */
+  padding: 12px 28px;   /*THIS FIXES IT */
   font-size: 15px;
 
   cursor: pointer;

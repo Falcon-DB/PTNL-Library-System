@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browse Books</title>
+    <link rel="stylesheet" href="/static/css/browse_books.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>College Library</h2>
+    <a href="/home">Home</a>
+    <a href="/profile">My Profile</a>
+    <a href="/browse-books" class="active">Browse Books</a>
+</div>
+
+<div class="main">
+<div class="header">
+    <h1>Browse Books</h1>
+</div>
+
+<!-- SEARCH -->
+<div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search by ISBN, Author, Title">
+    <button type="button" onclick="searchBooks()">Search</button>
+</div>
+
+<!-- BOOK LIST -->
+<div id="bookList" class="book-grid">
+    <p>Loading books...</p>
+</div>
+
+</div>
+
+<!-- MODAL -->
+
+<div id="bookModal" class="modal hidden">
+    <div class="modal-content" role="dialog">
+        <h2 id="modalTitle"></h2>
+        <p id="modalOwner"></p>
+        <p id="modalCondition"></p>
+    <div class="modal-buttons">
+        <button id="requestBtn" style="display:none;"></button>
+        <button id="borrowBtn"></button>
+        <button onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+</div>
+
+<script src="/static/js/browse_books.js"></script>
+
+</body>
+</html>

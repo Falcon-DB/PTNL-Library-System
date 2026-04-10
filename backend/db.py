@@ -4,7 +4,7 @@ def get_connection():
     try:
         conn = pyodbc.connect(
             "DRIVER={ODBC Driver 17 for SQL Server};"
-            "SERVER=localhost\\SQLEXPRESS;"   # 🔥 change if needed
+            "SERVER=localhost\\SQLEXPRESS;"
             "DATABASE=LibraryDB;"
             "Trusted_Connection=yes;"
         )

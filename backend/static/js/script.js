@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 //SIGNUP FUNCTION
 async function signupUser() {
-  console.log("🔥 Signup clicked");
+  console.log("Signup clicked");
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
   const pass = document.getElementById("password").value;
@@ -241,18 +241,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 //feedback function
-// ==========================
-// 🚀 LOAD CHECK
-// ==========================
+//LOAD CHECK
 console.log("JS LOADED ✅");
 
 document.addEventListener("DOMContentLoaded", () => {
 
   console.log("DOM READY ✅");
 
-  // ==========================
-  // ⭐ STAR RATING SYSTEM
-  // ==========================
+  //STAR RATING SYSTEM
   const stars = document.querySelectorAll("#stars i");
   const ratingInput = document.getElementById("rating");
 
@@ -265,7 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     stars.forEach((star, index) => {
 
-      // ⭐ CLICK
+      //CLICK
       star.addEventListener("click", () => {
         selectedRating = index + 1;
         ratingInput.value = selectedRating;
@@ -275,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Selected Rating:", selectedRating);
       });
 
-      // ✨ HOVER EFFECT
+      //HOVER EFFECT
       star.addEventListener("mouseover", () => {
         updateStars(index + 1);
       });
@@ -300,10 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Stars or rating input NOT found ❌");
   }
 
-
-  // ==========================
-  // 📩 FEEDBACK SUBMIT
-  // ==========================
+  //FEEDBACK SUBMIT
   const form = document.getElementById("feedbackForm");
   console.log("Form found:", form);
 
@@ -351,7 +344,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (res.ok) {
           alert("Feedback submitted successfully!");
 
-          // 🔄 RESET
+          // RESET
           form.reset();
           selectedRating = 0;
           ratingInput.value = "0";
@@ -376,10 +369,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
-// ==========================
-// 🔐 LOGOUT FUNCTION
-// ==========================
+//LOGOUT FUNCTION
 function logout() {
   localStorage.removeItem("user");
   window.location.href = "/login";

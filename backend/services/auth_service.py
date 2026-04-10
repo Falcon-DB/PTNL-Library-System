@@ -1,6 +1,6 @@
 from db import get_connection
 
-# 🔥 SIGNUP
+#SIGNUP
 def create_user(data):
     conn = get_connection()
     if not conn:
@@ -24,7 +24,7 @@ def create_user(data):
         return None
 
 
-# 🔥 LOGIN
+#LOGIN
 def login_user(email, password):
     conn = get_connection()
     if not conn:

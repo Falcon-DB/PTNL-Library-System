@@ -5,11 +5,13 @@ from routes.auth.auth_routes import auth_bp
 from routes.query.query_routes import query_bp
 from routes.subscription.subscription_routes import subscription_bp
 from routes.feedback.feedback_routes import feedback_bp
-
+from routes.book.book_routes import book_bp
+    
 app = Flask(__name__)
 CORS(app)
 
 app.register_blueprint(subscription_bp)
+app.register_blueprint(book_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(query_bp)
 app.register_blueprint(feedback_bp)
@@ -38,6 +40,14 @@ def profile():
 @app.route("/feedback")
 def feedback():
     return render_template("feedback.html")
+
+@app.route("/add-book")
+def add_book_page():
+    return render_template("add_book.html")
+
+@app.route("/browse-books")
+def browse_books_page():
+    return render_template("browse_books.html")
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

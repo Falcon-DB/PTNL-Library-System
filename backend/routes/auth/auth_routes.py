@@ -4,7 +4,7 @@ from services.auth_service import create_user, login_user
 auth_bp = Blueprint("auth", __name__)
 
 
-# 🔥 SIGNUP
+#SIGNUP
 @auth_bp.route("/api/auth/signup", methods=["POST"])
 def signup():
     data = request.json
@@ -17,7 +17,7 @@ def signup():
     return jsonify({"error": "Signup failed"}), 400
 
 
-# 🔥 LOGIN
+#LOGIN
 @auth_bp.route("/api/auth/login", methods=["POST"])
 def login():
     data = request.json

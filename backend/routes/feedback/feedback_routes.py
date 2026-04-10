@@ -12,11 +12,11 @@ def handle_feedback():
         rating = data.get("rating")
         comment = data.get("comment")
 
-        # 🔥 VALIDATION
+        #VALIDATION
         if not user_id or not rating:
             return jsonify({"error": "User ID and rating are required"}), 400
 
-        # 🔥 CALL SERVICE
+        #CALL SERVICE
         result = submit_feedback(user_id, rating, comment)
 
         if result:
