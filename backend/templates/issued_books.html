@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library</title>
+
+    <!--MAIN SITE CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <!--PAGE CSS-->
+    <link rel="stylesheet" href="/static/css/library.css">
+</head>
+
+<body>
+
+<!--YOUR ORIGINAL HEADER-->
+<header class="header">
+    <div class="container header-inner">
+        <a href="/home" class="logo">College Library</a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-right">
+            <nav class="nav" id="nav">
+                <ul class="nav-list">
+                    <li><a href="/home" class="nav-link">About</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="nav-link">Books▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/browse-books">Browse Books</a></li>
+                            <li><a href="/add-book">Add Book</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <!--ACTIVE PAGE-->
+                        <a href="#" class="nav-link active">My Library▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/wishlist">Wishlist</a></li>
+                            <li><a href="/due-books">Due Dates</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                    <a href="#dashboard" class="nav-link">Dashboard▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#user-dashboard">User Dashboard</a></li>
+                        <li><a href="#admin-dashboard">Admin Dashboard</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#admin" class="nav-link">Admin▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#manage-books">Manage Books</a></li>
+                        <li><a href="#manage-users">Manage Users</a></li>
+                        <li><a href="#issue-return">Issue / Return Control</a></li>
+                        <li><a href="#categories-management">Categories Management</a></li>
+                        <li><a href="#system-reports">System Reports</a></li>
+                    </ul>
+                </li>
+
+                    <li>
+                        <a href="/home#contact" class="nav-link">Connect</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- PROFILE -->
+            <div class="profile-menu">
+                <div class="profile-trigger">👤</div>
+
+                <ul class="profile-dropdown">
+                    <li><a href="/profile">My Profile</a></li>
+                    <li><a href="#">My Library</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#" onclick="logoutUser(); return false;">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!--MAIN CONTENT-->
+<section class="library-section">
+
+    <div class="library-header">
+        <h1>My Library</h1>
+        <p>Your borrowed books and reading activity</p>
+    </div>
+
+    <div class="library-table-wrapper">
+        <table class="library-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Issued</th>
+                    <th>Due</th>
+                    <th>Return</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody id="issuedBooksTable"></tbody>
+        </table>
+    </div>
+
+</section>
+<footer class="footer">
+    <div class="container footer-content">
+        <p class="footer-copyright">© FrostyFalcon</p>
+
+    <a href="https://www.linkedin.com/in/gourab-karmakar-629895323" class="footer-credit">
+        Designed by FrostyFalcon
+    </a>
+</div>
+
+</footer>
+<script src="/static/js/script.js"></script> <!--navbar JS -->
+<script src="/static/js/library.js"></script>
+
+<script>
+    loadMyBooks();
+</script>
+
+</body>
+</html>

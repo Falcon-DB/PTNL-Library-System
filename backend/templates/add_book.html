@@ -1,129 +1,184 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Add Book</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- CSS -->
+    <!-- GLOBAL STYLE -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- PAGE STYLE -->
     <link rel="stylesheet" href="/static/css/add_book.css">
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-    <h2>College Library</h2>
+<!-- 🔥 TOPBAR -->
+<header class="topbar">
+    <div class="logo">College Library</div>
 
-    <a href="/home">Home</a>
-    <a href="/profile">My Profile</a>
+    <div class="nav-right">
+        <nav class="nav" id="nav">
+            <ul class="nav-list">
+                <li><a href="/home#about" class="nav-link">About</a></li>
 
-    <a href="#" class="active">Books</a>
-    <a href="#">My Books</a>
-    <a href="#">Transactions</a>
-</div>
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Books▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/browse-books">Browse Books</a></li>
+                        <li><a href="#book-analytics">Book Analytics</a></li>
+                    </ul>
+                </li>
 
-<!-- MAIN -->
-<div class="main">
+                <li class="dropdown">
+                    <a href="#my-library" class="nav-link">My Library▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/my-books">Issued Books</a></li>
+                        <li><a href="/wishlist">Wishlist</a></li>
+                        <li><a href="/due-books">Due Dates</a></li>
+                    </ul>
+                </li>
 
-    <!-- HEADER -->
-    <div class="header">
-        <h1>Add New Book</h1>
+                <li class="dropdown">
+                    <a href="#dashboard" class="nav-link">Dashboard▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#user-dashboard">User Dashboard</a></li>
+                        <li><a href="#admin-dashboard">Admin Dashboard</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#admin" class="nav-link">Admin▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#manage-books">Manage Books</a></li>
+                        <li><a href="#manage-users">Manage Users</a></li>
+                        <li><a href="#issue-return">Issue / Return Control</a></li>
+                        <li><a href="#categories-management">Categories Management</a></li>
+                        <li><a href="#system-reports">System Reports</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#contact" class="nav-link">Connect</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- PROFILE -->
+        <div class="profile-menu">
+            <div class="profile-trigger">👤</div>
+
+            <ul class="profile-dropdown">
+                <li><a href="/profile">My Profile</a></li>
+                <li><a href="#my-library">My Library</a></li>
+                <li><a href="#settings">Settings</a></li>
+                <li><a href="#" onclick="logout(); return false;">Logout</a></li>
+            </ul>
+        </div>
     </div>
+</header>
 
-    <!-- FORM -->
+<!-- 🔥 MAIN CONTENT -->
+<div class="main">
+    <!-- FORM CARD -->
     <div class="form-container">
-
-        <!-- FORM TITLE -->
-        <h2 style="margin-bottom: 20px; color:#1e293b;">
-            Enter Book Details
-        </h2>
 
         <form id="addBookForm">
 
-            <div class="form-grid">
+            <!-- 🔥 SECTION 1 -->
+            <div class="form-section">
+                <h3>Basic Information</h3>
 
-                <!-- AUTHOR -->
-                <div class="form-group">
-                    <label>Author *</label>
-                    <select id="authorSelect" name="author_id" required>
-                        <option value="" disabled selected>Select Author</option>
-                    </select>
+                <div class="form-grid">
 
-                    <input 
-                        type="text" 
-                        id="authorInput" 
-                        name="author_name"
-                        placeholder="Enter new author name"
-                        style="display:none; margin-top:10px;"
-                    >
+                    <div class="form-group">
+                        <label>Author *</label>
+                        <select id="authorSelect" name="author_id" required>
+                            <option value="" disabled selected>Select Author</option>
+                        </select>
+
+                        <input 
+                            type="text" 
+                            id="authorInput" 
+                            name="author_name"
+                            placeholder="Enter new author name"
+                            style="display:none; margin-top:10px;"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label>Title *</label>
+                        <input 
+                            type="text" 
+                            id="title" 
+                            placeholder="Enter book title"
+                            required
+                        >
+                    </div>
+
                 </div>
+            </div>
 
-                <!-- TITLE -->
-                <div class="form-group">
-                    <label>Title *</label>
-                    <input 
-                        type="text" 
-                        id="title" 
-                        placeholder="Enter book title"
-                        required
-                    >
+            <!-- 🔥 SECTION 2 -->
+            <div class="form-section">
+                <h3>Book Details</h3>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Edition</label>
+                        <input 
+                            type="text" 
+                            id="edition"
+                            placeholder="e.g. 2nd Edition"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label>ISBN</label>
+                        <input 
+                            type="text" 
+                            id="isbn"
+                            placeholder="Enter ISBN number"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label>Condition *</label>
+                        <select id="condition" required>
+                            <option value="">Select Condition</option>
+                            <option value="new">New</option>
+                            <option value="good">Good</option>
+                            <option value="old">Old</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Publication Date</label>
+                        <input type="date" id="publicationDate">
+                    </div>
+
                 </div>
+            </div>
 
-                <!-- EDITION -->
-                <div class="form-group">
-                    <label>Edition</label>
-                    <input 
-                        type="text" 
-                        id="edition"
-                        placeholder="e.g. 2nd Edition"
-                    >
-                </div>
+            <!-- 🔥 SECTION 3 -->
+            <div class="form-section">
+                <h3>Description</h3>
 
-                <!-- ISBN -->
-                <div class="form-group">
-                    <label>ISBN</label>
-                    <input 
-                        type="text" 
-                        id="isbn"
-                        placeholder="Enter ISBN number"
-                    >
-                </div>
-
-                <!-- CONDITION -->
-                <div class="form-group">
-                    <label>Condition *</label>
-                    <select id="condition" required>
-                        <option value="">Select Condition</option>
-                        <option value="new">New</option>
-                        <option value="good">Good</option>
-                        <option value="old">Old</option>
-                    </select>
-                </div>
-
-                <!-- PUBLICATION DATE -->
-                <div class="form-group">
-                    <label>Publication Date</label>
-                    <input type="date" id="publicationDate">
-                </div>
-
-                <!-- DESCRIPTION -->
                 <div class="form-group full">
-                    <label>Description</label>
                     <input 
                         type="text"
                         id="description"
                         placeholder="Write a short description about the book..."
                     >
                 </div>
-
             </div>
 
-            <!-- SUBMIT BUTTON -->
-            <button type="submit" class="btn">
-                Add Book
-            </button>
+            <!-- ACTION -->
+            <div class="form-actions">
+                <button type="submit" class="btn">Add Book</button>
+            </div>
 
             <!-- MESSAGE -->
             <div id="message" class="message"></div>
@@ -136,6 +191,7 @@
 
 <!-- JS -->
 <script src="/static/js/add_book.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 </html>

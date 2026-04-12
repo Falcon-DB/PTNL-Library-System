@@ -1,4 +1,4 @@
--- 🔥 DATABASE SETUP
+--DATABASE SETUP
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'LibraryDB')
 BEGIN
     CREATE DATABASE LibraryDB;
@@ -8,7 +8,7 @@ GO
 USE LibraryDB;
 GO
 
--- 🔥 CORE TABLES (USER SYSTEM)
+--CORE TABLES (USER SYSTEM)
 -- USERS
 IF OBJECT_ID('Users', 'U') IS NOT NULL DROP TABLE Users;
 CREATE TABLE Users( 
@@ -27,7 +27,7 @@ CREATE TABLE Subscriptions (
     created_at DATETIME DEFAULT GETDATE()
 );
 
--- 🔥 USER INTERACTION TABLES
+--USER INTERACTION TABLES
 -- FEEDBACK
 IF OBJECT_ID('Feedback', 'U') IS NOT NULL DROP TABLE Feedback;
 CREATE TABLE Feedback (
@@ -41,7 +41,7 @@ CREATE TABLE Feedback (
     ON DELETE CASCADE
 );
 
--- FEEDBACK HISTORY
+--FEEDBACK HISTORY
 IF OBJECT_ID('FeedbackHistory', 'U') IS NOT NULL DROP TABLE FeedbackHistory;
 CREATE TABLE FeedbackHistory (
     feedbackHistory_id INT PRIMARY KEY IDENTITY(1,1),
@@ -54,7 +54,7 @@ CREATE TABLE FeedbackHistory (
     ON DELETE CASCADE
 );
 
--- QUERIES
+--QUERIES
 IF OBJECT_ID('Queries', 'U') IS NOT NULL DROP TABLE Queries;
 CREATE TABLE Queries (
     query_id INT PRIMARY KEY IDENTITY(1,1),
@@ -67,7 +67,7 @@ CREATE TABLE Queries (
     ON DELETE CASCADE
 );
 
--- 🔥 CONTENT TABLES (BOOK SYSTEM)
+--CONTENT TABLES (BOOK SYSTEM)
 -- AUTHORS
 IF OBJECT_ID('Authors', 'U') IS NOT NULL DROP TABLE Authors;
 CREATE TABLE Authors (
@@ -80,7 +80,7 @@ CREATE TABLE Authors (
     CreatedAt DATETIME DEFAULT GETDATE()
 );
 
--- AUTHOR ALTERATIONS (kept intact)
+--AUTHOR ALTERATIONS (kept intact)
 ALTER TABLE Authors
 ADD Date_of_Birth Date not null;
 
@@ -103,7 +103,7 @@ ALTER TABLE Authors
 ALTER COLUMN Date_of_Birth DATE NULL;
 
 
--- BOOKS
+--BOOKS
 IF OBJECT_ID('Books', 'U') IS NOT NULL DROP TABLE Books;
 CREATE TABLE Books (
     BookID BIGINT PRIMARY KEY IDENTITY(1,1),
@@ -120,7 +120,7 @@ CREATE TABLE Books (
 );
 
 
--- LISTINGS
+--LISTINGS
 IF OBJECT_ID('Listings', 'U') IS NOT NULL DROP TABLE Listings;
 CREATE TABLE Listings (
     ListingID BIGINT PRIMARY KEY IDENTITY(1,1),
@@ -142,7 +142,7 @@ CREATE TABLE Listings (
     FOREIGN KEY (BookID) REFERENCES Books(BookID)
 );
 
--- 🔥 REQUEST SYSTEM
+--REQUEST SYSTEM
 IF OBJECT_ID('Requests', 'U') IS NOT NULL DROP TABLE Requests;
 
 CREATE TABLE Requests (
@@ -157,7 +157,7 @@ CREATE TABLE Requests (
     FOREIGN KEY (UserID) REFERENCES Users(users_id)
 );
 
--- 🔥 TRANSACTION SYSTEM
+--TRANSACTION SYSTEM
 CREATE TABLE Transactions (
     TransactionID BIGINT PRIMARY KEY IDENTITY(1,1),
 
@@ -184,7 +184,7 @@ CREATE TABLE Transactions (
 );
 
 
--- 🔥 INDEXES (PERFORMANCE)
+--INDEXES (PERFORMANCE)
 -- CORE INDEXES
 CREATE INDEX idx_users_email ON Users(email);
 CREATE INDEX idx_feedback_user ON Feedback(user_id);
@@ -231,3 +231,75 @@ CREATE INDEX idx_transactions_request ON Transactions(RequestID);
 CREATE UNIQUE INDEX idx_unique_active_borrow
 ON Transactions(ListingID)
 WHERE Status = 'active';
+
+-- wishlist Table
+IF OBJECT_ID('Wishlist', 'U') IS NOT NULL DROP TABLE Wishlist;
+CREATE TABLE Wishlist (
+    WishlistID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    BookID BIGINT NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE(),
+
+    UNIQUE(UserID, BookID),
+
+    FOREIGN KEY (UserID) REFERENCES Users(users_id),
+    FOREIGN KEY (BookID) REFERENCES Books(BookID)
+);
+
+-- Search by User (MOST COMMON)
+CREATE INDEX idx_wishlist_user
+ON Wishlist(UserID);
+
+-- Search by Book (for analytics / popularity)
+CREATE INDEX idx_wishlist_book
+ON Wishlist(BookID);
+
+-- Fast sorting / recent activity queries
+CREATE INDEX idx_wishlist_created_at
+ON Wishlist(CreatedAt);
+
+-- Used when you fetch user's wishlist with sorting
+CREATE INDEX idx_wishlist_user_created
+ON Wishlist(UserID, CreatedAt DESC);
+
+
+
+--[USED ONLY TO RESTART ALL THE DATA FROM THE DATABASE INCLUDING IDENTITY VALUES
+SET QUOTED_IDENTIFIER ON;
+SET ANSI_NULLS ON;
+GO
+
+DECLARE @sql NVARCHAR(MAX) = '';
+
+-- Disable constraints
+SELECT @sql += 'ALTER TABLE [' + name + '] NOCHECK CONSTRAINT ALL;' + CHAR(10)
+FROM sys.tables;
+
+EXEC sp_executesql @sql;
+
+-- DELETE ALL DATA
+SET @sql = '';
+
+SELECT @sql += 'DELETE FROM [' + name + '];' + CHAR(10)
+FROM sys.tables;
+
+EXEC sp_executesql @sql;
+
+-- RESET IDENTITY
+SET @sql = '';
+
+SELECT @sql += '
+IF OBJECTPROPERTY(OBJECT_ID(''' + name + '''), ''TableHasIdentity'') = 1
+    DBCC CHECKIDENT (''' + name + ''', RESEED, 0);
+' + CHAR(10)
+FROM sys.tables;
+
+EXEC sp_executesql @sql;
+
+-- ENABLE CONSTRAINTS
+SET @sql = '';
+
+SELECT @sql += 'ALTER TABLE [' + name + '] WITH CHECK CHECK CONSTRAINT ALL;' + CHAR(10)
+FROM sys.tables;
+
+EXEC sp_executesql @sql;  --]

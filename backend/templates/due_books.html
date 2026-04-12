@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Due Books</title>
+
+    <!-- MAIN STYLE -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- LIBRARY STYLE -->
+    <link rel="stylesheet" href="/static/css/library.css">
+</head>
+
+<body>
+
+<!--SAME NAVBAR -->
+<header class="header">
+    <div class="container header-inner">
+    <a href="#" class="logo">College Library</a>
+
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- RIGHT SIDE GROUP -->
+    <div class="nav-right">
+        <!-- NAV -->
+        <nav class="nav" id="nav">
+            <ul class="nav-list">
+                <li><a href="/home" class="nav-link">About</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Books▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/browse-books">Browse Books</a></li>
+                        <li><a href="/add-book">Add Book</a></li>
+                        <li><a href="#book-analytics">Book Analytics</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#my-library" class="nav-link">My Library▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/my-books">Issued Books</a></li>
+                        <li><a href="#wishlist">Wishlist</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#dashboard" class="nav-link">Dashboard▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#user-dashboard">User Dashboard</a></li>
+                        <li><a href="#admin-dashboard">Admin Dashboard</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#admin" class="nav-link">Admin▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#manage-books">Manage Books</a></li>
+                        <li><a href="#manage-users">Manage Users</a></li>
+                        <li><a href="#issue-return">Issue / Return Control</a></li>
+                        <li><a href="#categories-management">Categories Management</a></li>
+                        <li><a href="#system-reports">System Reports</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#contact" class="nav-link">Connect</a>  <!-- Feedback is currently not available -->
+                    <!--<ul class="dropdown-menu">
+                        <li><a href="#contact">Contact Us</a></li>
+                         <li><a href="/feedback">Provide Feedback</a></li>
+                    </ul>-->
+                </li>
+            </ul>
+        </nav>
+
+        <!-- PROFILE -->
+        <div class="profile-menu">
+            <div class="profile-trigger">👤</div>
+
+            <ul class="profile-dropdown">
+                <li><a href="/profile">My Profile</a></li>
+                <li><a href="#my-library">My Library</a></li>
+                <li><a href="#settings">Settings</a></li>
+                <li><a href="#" onclick="logout(); return false;">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</header>
+<!-- 🔥 MAIN SECTION -->
+<section class="library-section">
+     
+    <div class="library-header">
+        <h1>Due Books</h1>
+        <p>Books that are overdue</p>
+    </div>
+    
+    <!-- MESSAGE -->
+    <div id="dueMessage" class="due-message"></div>
+
+    <!-- TABLE -->
+    <div class="library-table-wrapper">
+        <table class="library-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody id="dueBooksTable"></tbody>
+        </table>
+    </div>
+    <div class="library-extra">
+
+    <div class="extra-card">
+        <h3>📖 Reading Tips</h3>
+        <p>
+            Keep track of your reading schedule and return books on time to avoid penalties.
+            Set reminders and stay consistent with your reading goals.
+        </p>
+    </div>
+
+    <div class="extra-card">
+        <h3>⏳ Why Due Dates Matter</h3>
+        <p>
+            Returning books on time helps maintain availability for other readers.
+            It also ensures fair usage of shared resources in the library system.
+        </p>
+    </div>
+
+    <div class="extra-card">
+        <h3>💡 Pro Tip</h3>
+        <p>
+            Try to finish your books at least 2 days before the due date.
+            This gives you buffer time in case of delays.
+        </p>
+    </div>
+
+    </div>
+
+</section>
+<!--SAME FOOTER -->
+<footer class="footer">
+    <div class="container footer-content">
+        <p class="footer-copyright">© FrostyFalcon</p>
+
+    <a href="https://www.linkedin.com/in/gourab-karmakar-629895323" class="footer-credit">
+        Designed by FrostyFalcon
+    </a>
+</div>
+
+</footer>
+<!-- JS -->
+<script src="/static/js/script.js"></script>
+<script src="/static/js/library.js"></script>
+
+<script>
+    loadDueBooks();
+</script>
+
+</body>
+</html>

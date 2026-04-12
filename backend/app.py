@@ -6,6 +6,7 @@ from routes.query.query_routes import query_bp
 from routes.subscription.subscription_routes import subscription_bp
 from routes.feedback.feedback_routes import feedback_bp
 from routes.book.book_routes import book_bp
+from routes.library.library_routes import library_bp
     
 app = Flask(__name__)
 CORS(app)
@@ -15,6 +16,7 @@ app.register_blueprint(book_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(query_bp)
 app.register_blueprint(feedback_bp)
+app.register_blueprint(library_bp)
 
 @app.route("/")
 
@@ -48,6 +50,18 @@ def add_book_page():
 @app.route("/browse-books")
 def browse_books_page():
     return render_template("browse_books.html")
+
+@app.route("/my-books")
+def my_books_page():
+    return render_template("issued_books.html")
+
+@app.route("/due-books")
+def due_books_page():
+    return render_template("due_books.html")
+
+@app.route("/wishlist")
+def wishlist_page():
+    return render_template("wishlist.html")
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

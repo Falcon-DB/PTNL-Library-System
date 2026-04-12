@@ -337,7 +337,7 @@ section {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 60px;
+  padding: 80px 60px;   /* increased vertical spacing */
   background: url("../images/library-homepage.jpg") no-repeat center center/cover;
 }
 
@@ -374,12 +374,11 @@ section {
 }
 
 /*MAIN HEADING*/
-.hero h1 {
-  font-size: 64px;
+.hero h1 {          
+  font-size: 68px;
   font-weight: 800;
-  color: #ffffff;
-  line-height: 1.1;
-  margin-bottom: 20px;
+  letter-spacing: -1px;
+  color: #dee9f8;
 }
 
 /*DESCRIPTION*/
@@ -962,7 +961,7 @@ section {
   border: none;
   border-radius: 8px;
 
-  padding: 12px 28px;   /*THIS FIXES IT */
+  padding: 12px 28px;
   font-size: 15px;
 
   cursor: pointer;

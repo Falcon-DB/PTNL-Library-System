@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist</title>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/library.css">
+</head>
+
+<body>
+
+<!-- 🔥 NAVBAR (SAME AS OTHER PAGES) -->
+<header class="header">
+    <div class="container header-inner">
+        <a href="/home" class="logo">College Library</a>
+
+        <div class="nav-right">
+            <nav class="nav">
+                <ul class="nav-list">
+
+                    <li><a href="/home" class="nav-link">About</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="nav-link">Books▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/browse-books">Browse Books</a></li>
+                            <li><a href="/add-book">Add Book</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="nav-link active">My Library▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/my-books">Issued Books</a></li>
+                            <li><a href="/due-books">Due Dates</a></li>
+                            <li><a href="/wishlist">Wishlist</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- 🔥 MAIN CONTENT -->
+<section class="library-section">
+
+    <div class="library-header">
+        <h1>My Wishlist ❤️</h1>
+        <p>Your favorite books saved for later</p>
+    </div>
+
+    <!-- RESULT COUNT -->
+    <p id="wishlistCount" class="wishlist-count"></p>
+
+    <!-- GRID -->
+    <div id="wishlistContainer" class="book-grid"></div>
+
+</section>
+
+<!-- JS -->
+<script src="/static/js/script.js"></script>
+<script src="/static/js/library.js"></script>
+
+<script>
+    loadWishlist();
+</script>
+
+</body>
+</html>

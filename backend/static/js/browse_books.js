@@ -2,6 +2,16 @@
 const container = document.getElementById("bookList");
 const searchInput = document.getElementById("searchInput");
 
+// 🔥 HELPER (ADDED)
+function getUserId() {
+    try {
+        const user = JSON.parse(localStorage.getItem("user"));
+        return user?.user_id || null;
+    } catch {
+        return null;
+    }
+}
+
 //LOAD BOOKS
 async function loadBooks(query = "") {
     try {
@@ -20,16 +30,43 @@ async function loadBooks(query = "") {
             return;
         }
 
+        // 🔥 FETCH WISHLIST ONCE (ADDED)
+        let wishlistIds = [];
+        const userId = getUserId();
+
+        if (userId) {
+            try {
+                const resWish = await fetch(`/api/wishlist?user_id=${userId}`);
+                const wishlist = await resWish.json();
+                wishlistIds = wishlist.map(b => b.book_id);
+            } catch (e) {
+                console.error("Wishlist fetch error:", e);
+            }
+        }
+
         books.forEach(book => {
             const card = document.createElement("div");
             card.className = "book-card";
 
+            // 🔥 CHECK IF IN WISHLIST (ADDED)
+            const isLiked = wishlistIds.includes(book.book_id);
+
             card.innerHTML = `
-                <h3>${book.title}</h3>
-                <p><strong>Author:</strong> ${book.author}</p>
-                <p><strong>ISBN:</strong> ${book.isbn || "N/A"}</p>
-                <p style="color:#3b82f6; font-size:13px;">Click to view details →</p>
-            `;
+    <span 
+        class="heart-icon ${isLiked ? "liked" : ""}" 
+        onclick="toggleWishlist(event, ${book.book_id})"
+    >
+        <svg viewBox="0 0 24 24" class="heart-svg">
+            <path d="M12 21s-6.5-4.35-10-8.28C-1.5 8.4 1.5 3 6.5 3c2.54 0 4.04 1.5 5.5 3C13.46 4.5 14.96 3 17.5 3 22.5 3 25.5 8.4 22 12.72 18.5 16.65 12 21 12 21z"/>
+        </svg>
+    </span>
+
+    <h3>${book.title}</h3>
+    <p><strong>Author:</strong> ${book.author}</p>
+    <p><strong>ISBN:</strong> ${book.isbn || "N/A"}</p>
+
+    <p style="color:#3b82f6; font-size:13px;">Click to view details →</p>
+`;
 
             //CLICK HANDLER
             card.onclick = () => openBookDetails(book.book_id);
@@ -79,31 +116,40 @@ async function openBookDetails(bookId) {
 
         const borrowBtn = document.getElementById("borrowBtn");
         const requestBtn = document.getElementById("requestBtn");
+
         const user = JSON.parse(localStorage.getItem("user"));
 
-        //RESET
         borrowBtn.disabled = false;
         requestBtn.style.display = "none";
+        // SYNC HEART
+        try {
+            if (wishlistBtn && user && user.user_id) {
+                const wishlist = await resWish.json();
+
+                const exists = wishlist.some(b => b.book_id === data.book_id);
+
+                if (exists) {
+                    wishlistBtn.classList.add("liked");
+                }
+            }
+        } catch (e) {
+            console.error("Wishlist sync error:", e);
+        }
 
         if (data.available) {
-            //AVAILABLE
             borrowBtn.innerText = "Borrow Book";
             borrowBtn.style.background = "#10b981";
             borrowBtn.onclick = () => borrowBook(data.listing_id);
 
         } else {
-            //BORROWED
             borrowBtn.style.background = "#ef4444";
 
-            //CHECK OWNER
             if (user && user.user_id === data.borrower_id) {
-                // ✅ RETURN BUTTON
                 borrowBtn.innerText = "Return Book";
                 borrowBtn.disabled = false;
                 borrowBtn.onclick = () => returnBook(data.listing_id);
 
             } else {
-                //OTHER USER
                 borrowBtn.innerText = "Borrowed";
                 borrowBtn.disabled = true;
 

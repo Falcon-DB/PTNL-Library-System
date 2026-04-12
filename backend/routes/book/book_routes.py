@@ -307,3 +307,80 @@ def return_book():
     finally:
         cursor.close()
         conn.close()
+#Add-wishlist
+@book_bp.route("/api/wishlist/add", methods=["POST"])
+def add_to_wishlist():
+    data = request.get_json()
+    user_id = data.get("user_id")
+    book_id = data.get("book_id")
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("""
+        INSERT INTO Wishlist (UserID, BookID)
+        VALUES (?, ?)
+        """, (user_id, book_id))
+
+        conn.commit()
+        return jsonify({"message": "Added to wishlist"})
+
+    except:
+        return jsonify({"error": "Already in wishlist"}), 400
+
+    finally:
+        cursor.close()
+        conn.close()
+
+#Remove from wishlist
+@book_bp.route("/api/wishlist/remove", methods=["POST"])
+def remove_from_wishlist():
+    data = request.get_json()
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("""
+        DELETE FROM Wishlist
+        WHERE UserID = ? AND BookID = ?
+        """, (data["user_id"], data["book_id"]))
+
+        conn.commit()
+        return jsonify({"message": "Removed"})
+
+    finally:
+        cursor.close()
+        conn.close()
+
+#Get wishlist
+@book_bp.route("/api/wishlist", methods=["GET"])
+def get_wishlist():
+    user_id = request.args.get("user_id")
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("""
+        SELECT B.BookID, B.Title, A.Name, B.ISBN
+        FROM Wishlist W
+        JOIN Books B ON W.BookID = B.BookID
+        JOIN Authors A ON B.AuthorID = A.AuthorID
+        WHERE W.UserID = ?
+        """, (user_id,))
+
+        return jsonify([
+            {
+                "book_id": row[0],
+                "title": row[1],
+                "author": row[2],
+                "isbn": row[3]
+            }
+            for row in cursor.fetchall()
+        ])
+
+    finally:
+        cursor.close()
+        conn.close()
